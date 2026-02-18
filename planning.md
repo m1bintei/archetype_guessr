@@ -1,0 +1,8 @@
+- Faire une énumération des différents archetypes ainsi que définir certains mot clé ("tag") les définissant.
+- Faire / Copier des articles sur différents sujets avec les tags associés.
+- Faire l'UI du site (en se basant sur le wireframe (cf schema_site))
+- Faire la "logique" du site
+    - Mesurer le temps de consultation de chaque article (afin d'éviter les cliques faites pour fausser l'algorithme)
+    - Détection de la souris sur les pubs
+    - Algorithme de classification
+        - Proba et calcul de l'archetype de l'utilisateur

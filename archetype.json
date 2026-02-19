@@ -1,0 +1,8 @@
+{
+	"archetypes": {
+		"sportif_bien-etre": {
+			"desc" : "Une personne qui prend soin de son alimentation, son corps de par les exercices physique, ains que de sont bien être avec mode de vie sain",
+			"tags" : ["sport","santé","bien-etre","nutrition"]
+		}
+	}
+}

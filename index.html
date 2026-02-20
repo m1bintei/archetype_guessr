@@ -2,174 +2,271 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Archetype Guessr</title>
-
+<title>Archetype Guessr - Bien-être</title>
 <style>
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
 }
 
 /* HEADER */
 header {
-    background: white;
-    padding: 25px;
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    position: relative;
+  background:white;
+  padding:25px;
+  text-align:center;
+  font-size:30px;
+  font-weight:bold;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  position:relative;
 }
-
 .home-icon {
-    position: absolute;
-    left: 20px;
-    top: 25px;
-    font-size: 22px;
-    cursor: pointer;
+  position:absolute;
+  left:20px;
+  top:25px;
+  font-size:22px;
 }
+.home-icon a {text-decoration:none;color:black;}
 
 /* GRID LAYOUT */
 .main {
-    display: grid;
-    grid-template-columns: 220px 1fr 220px;
-    gap: 25px;
-    max-width: 1300px;
-    margin: 40px auto;
+  display:grid;
+  grid-template-columns:220px 1fr 220px;
+  gap:25px;
+  max-width:1300px;
+  margin:40px auto;
 }
 
-/* SIDEBAR */
+/* SIDEBARS */
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display:flex;
+  flex-direction:column;
+  gap:25px;
 }
 
 /* BANNIÈRES */
 .banner {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  position:relative;
 }
-
 .banner img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.banner img.clignote {
+  animation: clignote 1.5s infinite alternate;
+}
+@keyframes clignote {
+  0% {opacity:1;}
+  50% {opacity:0.5;}
+  100% {opacity:1;}
 }
 
-/* ARTICLE CARD */
-.article-card {
-    background: white;
-    display: flex;
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
+/* ARTICLE CARDS */
+.articles {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:25px;
 }
 
-.article-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+.card {
+  background:white;
+  border-radius:18px;
+  padding:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:0.3s;
 }
-
-.article-img {
-    width: 130px;
-    height: 100px;
-    border-radius: 10px;
-    margin-right: 20px;
-    object-fit: cover;
+.card:hover {transform:translateY(-5px);}
+.card img {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:12px;
 }
-
-.article-content h2 {
-    margin: 0;
-    font-size: 20px;
+.card h3 {
+  margin:15px 0 10px;
 }
-
-.article-content a {
-    text-decoration: none;
-    color: #333;
-}
-
-.article-content p {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #666;
+.card p {color:#666; font-size:14px;}
+.card .time {font-size:13px; color:#999;}
+.card a {
+  display:inline-block;
+  margin-top:10px;
+  text-decoration:none;
+  font-weight:bold;
+  color:#6a5acd;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="home-icon">🏠</div>
+<div class="home-icon"><a href="#">🏠</a></div>
 Archetype Guessr
 </header>
 
 <div class="main">
 
-<!-- GAUCHE -->
+<!-- BANNIERE GAUCHE -->
 <div class="sidebar">
-
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" alt="Bien-être">
+<div class="banner"><img class="clignote" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" alt="Bien-être"></div>
+<div class="banner"><img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=600" alt="Sport"></div>
+<div class="banner"><img class="clignote" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600" alt="Nutrition"></div>
 </div>
 
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1554284126-aa88f22d8b74?w=600" alt="Sport">
+<!-- COLONNE CENTRALE : ARTICLES -->
+<div class="articles">
+
+<!-- ARTICLE 1 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800">
+<h3>Pourquoi le silence devient un luxe dans nos vies modernes</h3>
+<p>Le silence est devenu une ressource rare et essentielle pour notre équilibre mental face aux notifications et bruit permanent.</p>
+<span class="time">⏱ 7 min</span>
+<a href="articles/art-1.html">Lire l’article</a>
 </div>
 
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600" alt="Nutrition">
+<!-- ARTICLE 2 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800">
+<h3>Yoga, pilates, mobilité : pourquoi le sport doux séduit de plus en plus</h3>
+<p>Le sport doux attire ceux qui cherchent équilibre, souplesse et bien-être global.</p>
+<span class="time">⏱ 8 min</span>
+<a href="articles/art-2.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 3 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800">
+<h3>Musculation et confiance en soi : un lien plus profond qu’on ne le croit</h3>
+<p>Au-delà du physique, la musculation transforme l’image de soi et renforce la confiance personnelle.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-3.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 4 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800">
+<h3>Sport en pleine nature : pourquoi l’extérieur amplifie les bienfaits</h3>
+<p>Courir en forêt ou marcher en montagne stimule le mental et réduit le stress.</p>
+<span class="time">⏱ 8 min</span>
+<a href="articles/art-4.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 5 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520975922215-230b2f6c0e0f?w=800">
+<h3>Le sport collectif, un remède contre l’isolement moderne ?</h3>
+<p>Pratiquer en équipe renforce les liens sociaux et lutte contre la solitude.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-5.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 6 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=800">
+<h3>Se lever tôt rend-il vraiment plus heureux ?</h3>
+<p>Routine matinale et productivité : se lever tôt améliore-t-il réellement le bien-être ?</p>
+<span class="time">⏱ 8 min</span>
+<a href="articles/art-6.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 7 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800">
+<h3>Les plantes adaptogènes : effet de mode ou révolution du bien-être ?</h3>
+<p>Ginseng, ashwagandha et rhodiola promettent de réduire le stress. Science ou marketing ?</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-7.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 8 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800">
+<h3>Marcher 20 minutes par jour change-t-il vraiment le cerveau ?</h3>
+<p>Une simple marche quotidienne pourrait améliorer mémoire, humeur et concentration.</p>
+<span class="time">⏱ 8 min</span>
+<a href="articles/art-8.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 9 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800">
+<h3>Le retour des rituels du soir : comment mieux dormir à l’ère numérique</h3>
+<p>Écrans et notifications perturbent notre sommeil. Les rituels du soir font leur grand retour.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-9.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 10 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=800">
+<h3>Pourquoi le sport est devenu un antidote moderne au stress</h3>
+<p>Endorphines et dopamine : le sport agit comme un régulateur émotionnel puissant.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-10.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 11 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1523978591478-c753949ff840?w=800">
+<h3>Manger en pleine conscience : la révolution silencieuse de l’assiette</h3>
+<p>Apprendre à manger lentement et attentivement change notre relation à la nourriture et à notre corps.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-11.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 12 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=800">
+<h3>Le microbiote intestinal : ce deuxième cerveau qui influence notre humeur</h3>
+<p>Le microbiote a un impact direct sur nos émotions et notre santé mentale.</p>
+<span class="time">⏱ 10 min</span>
+<a href="articles/art-12.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 13 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1510626176961-4b0a55ce6d5a?w=800">
+<h3>Sucre et énergie : pourquoi le pic rapide cache souvent une chute brutale</h3>
+<p>Les pics glycémiques rapides entraînent souvent une fatigue soudaine et un manque d’énergie durable.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-13.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 14 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=800">
+<h3>Hydratation : pourquoi boire de l’eau change plus que l’on ne croit</h3>
+<p>Boire suffisamment d’eau influence la concentration, l’énergie et l’équilibre général du corps.</p>
+<span class="time">⏱ 9 min</span>
+<a href="articles/art-14.html">Lire l’article</a>
+</div>
+
+<!-- ARTICLE 15 -->
+<div class="card">
+<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800" alt="Alimentation intuitive">
+
+
+<h3>Alimentation intuitive : écouter son corps plutôt que les tendances</h3>
+<p>Écouter ses signaux de faim et de satiété permet une alimentation plus saine et durable.</p>
+<span class="time">⏱ 10 min</span>
+<a href="articles/art-15.html">Lire l’article</a>
 </div>
 
 </div>
 
-<!-- CENTRE -->
-<div>
-
-<script>
-for (let i = 1; i <= 15; i++) {
-    document.write(`
-        <div class="article-card">
-            <img class="article-img"
-                 src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400"
-                 alt="article">
-
-            <div class="article-content">
-                <a href="articles/art-${i}-bien-etre.html">
-                    <h2>Article ${i} - Bien-être</h2>
-                </a>
-                <p>Bien-être • Santé • Lifestyle</p>
-            </div>
-        </div>
-    `);
-}
-</script>
-
-</div>
-
-<!-- DROITE -->
+<!-- BANNIERE DROITE -->
 <div class="sidebar">
-
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600" alt="Fitness">
-</div>
-
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="Healthy food">
-</div>
-
-<div class="banner">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600" alt="Nature">
+<div class="banner"><img class="clignote" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600" alt="Fitness"></div>
+<div class="banner"><img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="Healthy food"></div>
+<div class="banner"><img class="clignote" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600" alt="Nature"></div>
 </div>
 
 </div>
-
-</div>
-
 </body>
 </html>

@@ -58,14 +58,7 @@ header {
   object-fit:cover;
   border-radius:12px;
 }
-.banner img.clignote {
-  animation: clignote 1.5s infinite alternate;
-}
-@keyframes clignote {
-  0% {opacity:1;}
-  50% {opacity:0.5;}
-  100% {opacity:1;}
-}
+
 
 /* ARTICLE CARDS */
 .articles {
@@ -127,143 +120,30 @@ Archetype Guessr
 </div>
 
 <!-- COLONNE CENTRALE : ARTICLES -->
-<div class="articles">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800">
-<h3>Pourquoi le silence devient un luxe dans nos vies modernes</h3>
-<p>Le silence est devenu une ressource rare et essentielle pour notre équilibre mental face aux notifications et bruit permanent.</p>
-<span class="time">⏱ 7 min</span>
-<a href="articles/art-1-bien-etre.html">Lire l’article</a>
-</div>
+<div class="articles" id="articles-container"></div>
+<script>
+fetch('articles.json').then(response => response.json()).then(data => {
+    const mix = data.sort(() => 0.5 - Math.random());
+    const selected = mix.slice(0, 10);
+    const container = document.getElementById("articles-container");
+    selected.forEach(article => {
+        const card = `
+        <div class="card" onclick="window.location.href='articles/article_${article.id}.html'"}>
+            <img src="${article.image}">
+            <h3>${article.title}</h3>
+            <p>${article.description}</p>
+            <span class="time"> ${article.readingTime} min</span>
+            <a href="articles/article_${article.id}"> Lire l'article </a>
+        </div>
+        `;
+        container.innerHTML += card;
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800">
-<h3>Yoga, pilates, mobilité : pourquoi le sport doux séduit de plus en plus</h3>
-<p>Le sport doux attire ceux qui cherchent équilibre, souplesse et bien-être global.</p>
-<span class="time">⏱ 8 min</span>
-<a href="articles/art-2-bien-etre.html">Lire l’article</a>
-</div>
+    });
+});
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800">
-<h3>Musculation et confiance en soi : un lien plus profond qu’on ne le croit</h3>
-<p>Au-delà du physique, la musculation transforme l’image de soi et renforce la confiance personnelle.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-3-bien-etre.html">Lire l’article</a>
-</div>
+</script>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800">
-<h3>Sport en pleine nature : pourquoi l’extérieur amplifie les bienfaits</h3>
-<p>Courir en forêt ou marcher en montagne stimule le mental et réduit le stress.</p>
-<span class="time">⏱ 8 min</span>
-<a href="articles/art-4-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1520975922215-230b2f6c0e0f?w=800">
-<h3>Le sport collectif, un remède contre l’isolement moderne ?</h3>
-<p>Pratiquer en équipe renforce les liens sociaux et lutte contre la solitude.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-5-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?w=800">
-<h3>Se lever tôt rend-il vraiment plus heureux ?</h3>
-<p>Routine matinale et productivité : se lever tôt améliore-t-il réellement le bien-être ?</p>
-<span class="time">⏱ 8 min</span>
-<a href="articles/art-6-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=800">
-<h3>Les plantes adaptogènes : effet de mode ou révolution du bien-être ?</h3>
-<p>Ginseng, ashwagandha et rhodiola promettent de réduire le stress. Science ou marketing ?</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-7-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800">
-<h3>Marcher 20 minutes par jour change-t-il vraiment le cerveau ?</h3>
-<p>Une simple marche quotidienne pourrait améliorer mémoire, humeur et concentration.</p>
-<span class="time">⏱ 8 min</span>
-<a href="articles/art-8-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800">
-<h3>Le retour des rituels du soir : comment mieux dormir à l’ère numérique</h3>
-<p>Écrans et notifications perturbent notre sommeil. Les rituels du soir font leur grand retour.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-9-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=800">
-<h3>Pourquoi le sport est devenu un antidote moderne au stress</h3>
-<p>Endorphines et dopamine : le sport agit comme un régulateur émotionnel puissant.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-10-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1523978591478-c753949ff840?w=800">
-<h3>Manger en pleine conscience : la révolution silencieuse de l’assiette</h3>
-<p>Apprendre à manger lentement et attentivement change notre relation à la nourriture et à notre corps.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-11-bien-etre.html">Lire l’article</a>
-</div>
-
-<!-- article 12 -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=800">
-<h3>Le microbiote intestinal : ce deuxième cerveau qui influence notre humeur</h3>
-<p>Le microbiote a un impact direct sur nos émotions et notre santé mentale.</p>
-<span class="time">⏱ 10 min</span>
-<a href="articles/art-12-bien-etre.html">Lire l’article</a>
-</div>
-
-<!-- article 13 -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1510626176961-4b0a55ce6d5a?w=800">
-<h3>Sucre et énergie : pourquoi le pic rapide cache souvent une chute brutale</h3>
-<p>Les pics glycémiques rapides entraînent souvent une fatigue soudaine et un manque d’énergie durable.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-13-bien-etre.html">Lire l’article</a>
-</div>
-
-<!-- article 14 -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?w=800">
-<h3>Hydratation : pourquoi boire de l’eau change plus que l’on ne croit</h3>
-<p>Boire suffisamment d’eau influence la concentration, l’énergie et l’équilibre général du corps.</p>
-<span class="time">⏱ 9 min</span>
-<a href="articles/art-14-bien-etre.html">Lire l’article</a>
-</div>
-
-<!-- article 15 -->
-<div class="card">
-<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800">
-<h3>Alimentation intuitive : écouter son corps plutôt que les tendances</h3>
-<p>Écouter ses signaux de faim et de satiété permet une alimentation plus saine et durable.</p>
-<span class="time">⏱ 10 min</span>
-<a href="articles/art-15-bien-etre.html">Lire l’article</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800">
-<h3>Sous les sables de Gizeh : La découverte qui redéfinit l'Égypte antique</h3>
-<p>jufufiooiuiii.</p>
-<span class="time">⏱ 10 min</span>
-<a href="articles/article_5_pyramides.html"> Lire l’article</a>
-</div>
-
-
-
-</div>
 
 <!-- BANNIERE DROITE -->
 <div class="sidebar">

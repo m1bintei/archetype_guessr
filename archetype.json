@@ -1,8 +1,64 @@
 {
-	"archetypes": {
-		"sportif_bien-etre": {
-			"desc" : "Une personne qui prend soin de son alimentation, son corps de par les exercices physique, ains que de sont bien être avec mode de vie sain",
-			"tags" : ["sport","santé","bien-etre","nutrition"]
-		}
-	}
+  "archetypes": {
+
+    "sportif_bien_etre": {
+      "desc": "Une personne qui prend soin de son alimentation, de son corps par l'exercice physique et adopte un mode de vie sain.",
+      "tags": ["healthy", "sport_performance"]
+    },
+
+    "biohacker": {
+      "desc": "Un profil orienté optimisation personnelle, combinant technologie et amélioration de la performance physique et mentale.",
+      "tags": ["healthy", "technologie"]
+    },
+
+    "entrepreneur_ambitieux": {
+      "desc": "Une personne focalisée sur la réussite professionnelle, l'investissement et la création de valeur.",
+      "tags": ["business", "finance"]
+    },
+
+    "investisseur_stratege": {
+      "desc": "Un profil orienté gestion financière, crypto, immobilier et recherche de revenus passifs.",
+      "tags": ["finance"]
+    },
+
+    "tech_visionnaire": {
+      "desc": "Passionné par l'innovation, l'intelligence artificielle et les nouvelles technologies.",
+      "tags": ["technologie"]
+    },
+
+    "intellectuel_cultive": {
+      "desc": "Une personne curieuse, attirée par la philosophie, la culture générale et l'apprentissage continu.",
+      "tags": ["culture"]
+    },
+
+    "developpement_personnel": {
+      "desc": "Un individu centré sur la croissance intérieure, le mindset et l'amélioration continue.",
+      "tags": ["developpement_personnel"]
+    },
+
+    "lifestyle_equilibre": {
+      "desc": "Recherche l'équilibre entre vie personnelle, bien-être, organisation et qualité de vie.",
+      "tags": ["lifestyle", "healthy"]
+    },
+
+    "leader_professionnel": {
+      "desc": "Un profil orienté leadership, management et progression de carrière.",
+      "tags": ["business", "developpement_personnel"]
+    },
+
+    "citoyen_engage": {
+      "desc": "Sensibilisé aux enjeux sociétaux, écologiques et à l'impact social.",
+      "tags": ["societe"]
+    },
+
+    "partenaire_engage": {
+      "desc": "Investi dans la vie de couple, la stabilité relationnelle et les projets communs.",
+      "tags": ["couple"]
+    },
+
+    "celibataire_explorateur": {
+      "desc": "Indépendant, curieux des rencontres et attaché à sa liberté personnelle.",
+      "tags": ["celibataire", "lifestyle"]
+    }
+  }
 }

@@ -1,11 +1,6 @@
 {
   "archetypes": {
 
-    "sportif_bien_etre": {
-      "desc": "Une personne qui prend soin de son alimentation, de son corps par l'exercice physique et adopte un mode de vie sain.",
-      "tags": ["healthy", "sport_performance"]
-    },
-
     "biohacker": {
       "desc": "Un profil orienté optimisation personnelle, combinant technologie et amélioration de la performance physique et mentale.",
       "tags": ["healthy", "technologie"]

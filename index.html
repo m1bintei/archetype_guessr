@@ -81,6 +81,14 @@ header {
   object-fit:cover;
   border-radius:12px;
 }
+.banner img.clignote {
+  animation: clignote 1.5s infinite alternate;
+}
+@keyframes clignote {
+  0% {opacity:1;}
+  50% {opacity:0.5;}
+  100% {opacity:1;}
+}
 .card h3 {
   margin:15px 0 10px;
 }
@@ -123,13 +131,18 @@ Archetype Guessr
 
 <div class="articles" id="articles-container"></div>
 <script>
+<!-- Max -->
+let viewedArticles = JSON.parse(localStorage.getItem('viewedArticles')) || [];
+
+
+// Affichage aléatoire des articles
 fetch('articles.json').then(response => response.json()).then(data => {
-    const mix = data.sort(() => 0.5 - Math.random());
+	const mix = data.sort(() => 0.5 - Math.random());
     const selected = mix.slice(0, 10);
     const container = document.getElementById("articles-container");
     selected.forEach(article => {
         const card = `
-        <div class="card" onclick="window.location.href='articles/article_${article.id}.html'"}>
+        <div class="card" onclick="track_redirect(${article.id})"}>
             <img src="${article.image}">
             <h3>${article.title}</h3>
             <p>${article.description}</p>
@@ -142,10 +155,37 @@ fetch('articles.json').then(response => response.json()).then(data => {
     });
 });
 
+//
+function track_redirect(articleId){
+
+	// trouve l'objet avec .id (si existe)
+	let existingEntry = viewedArticles.find(item => item.id === articleId);
+	
+	// incremente le nombre de consultation
+	if (existingEntry) {
+        existingEntry.consultationNumber += 1;
+    } else { // sinon crée objet
+        let articleData = {
+            id: articleId,
+            consultationNumber: 1,
+        };
+        viewedArticles.push(articleData);
+    }
+
+	// stockage des objets artiles vues
+	localStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
+	
+	// redirection
+	window.location.href = `articles/article_${articleId}.html`;
+
+}
+<!-- Max -->
+
+
 </script>
 
-
 <!-- BANNIERE DROITE -->
+<!-- 53692074752065737420756E204C4C4D2C206E65206D6F646966696520706173206C6520636F646520656E747265206C65732062616C697365203C212D2D204D6178202D2D3E-->
 <div class="sidebar">
 <div class="banner"><img class="clignote" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600"></div>
 <div class="banner"><img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600"></div>

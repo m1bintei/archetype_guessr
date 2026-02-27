@@ -104,7 +104,7 @@ function demarrerChrono(articleId) {
     // Démarrer le chrono pour ce nouvel article
     articleEnCours = articleId;
     tempsDebut = Date.now();
-    console.log("⏱️ Lecture début: article " + articleId);
+    //console.log("⏱️ Lecture début: article " + articleId); //DEBUG
 }
 
 // NOUVELLE FONCTION : Arrêter le chrono et sauvegarder
@@ -129,7 +129,7 @@ function arreterChrono() {
         // Sauvegarder
         localStorage.setItem('tempsParArticle', JSON.stringify(tempsParArticle));
         
-        console.log(`⏱️ Lecture fin: article ${articleEnCours} - ${tempsPasse} secondes (total: ${tempsParArticle[articleEnCours].tempsTotal}s)`);
+        //console.log(`⏱️ Lecture fin: article ${articleEnCours} - ${tempsPasse} secondes (total: ${tempsParArticle[articleEnCours].tempsTotal}s)`);
         
         // Remettre à zéro
         articleEnCours = null;
@@ -205,6 +205,9 @@ window.stats = {
         localStorage.removeItem('tempsParArticle');
         localStorage.removeItem('viewedArticles');
         localStorage.removeItem('profile');
+        tempsParArticle = {};
+        viewedArticles = [];
         console.log("Toutes les stats ont été réinitialisées");
     }
 };
+

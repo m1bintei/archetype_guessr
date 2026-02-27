@@ -94,7 +94,8 @@ let profile = {
   celibataire: 0
 };
 */
-const profile = JSON.parse(localStorage.getItem("profile")) || {};
+const tempsParArticle = JSON.parse(localStorage.getItem("tempsParArticle")) || {};
+const profile = buildWeightedProfile();
 
 let archetypesData = {};
 
@@ -117,6 +118,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+function buildWeightedProfile() {
+
+  const articles = JSON.parse(localStorage.getItem("articlesData")) || [];
+  const tempsParArticle = JSON.parse(localStorage.getItem("tempsParArticle")) || {};
+ 
+
+  let weightedProfile = {};
+
+  articles.forEach(article => {
+
+    const temps = tempsParArticle[article.id] || 0;
+
+    let weight = 1;
+
+    if (temps > 180) { // en sec
+      weight = 2;
+    } else if (temps > 40) { 
+      weight = 1;
+    } else {
+      weight = 0.5;
+    }
+
+    article.tags.forEach(tag => {
+
+      if (!weightedProfile[tag]) {
+        weightedProfile[tag] = 0;
+      }
+
+      weightedProfile[tag] += weight;
+
+    });
+
+  });
+
+  return weightedProfile;
+}
 
 //calcul de l'archetype
 function calculateArchetype() {

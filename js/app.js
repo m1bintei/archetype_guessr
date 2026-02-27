@@ -6,12 +6,7 @@ let profile = {};
 document.addEventListener("DOMContentLoaded", () => {
 
     Promise.all([
-       fetch('data/articles.json').then(response => {
-    if (!response.ok) {
-        throw new Error('Impossible de charger articles.json');
-    }
-    return response.json();
-}),
+       fetch('articles.json').then(response => response.json()),
         fetch('data/tagCategories.json').then(res => res.json())
     ])
     .then(([articles, tags]) => {

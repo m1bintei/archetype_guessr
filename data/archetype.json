@@ -1,59 +1,75 @@
 {
   "archetypes": {
 
-    "biohacker": {
-      "desc": "Un profil orienté optimisation personnelle, combinant technologie et amélioration de la performance physique et mentale.",
-      "tags": ["healthy", "technologie"]
-    },
-
-    "entrepreneur_ambitieux": {
-      "desc": "Une personne focalisée sur la réussite professionnelle, l'investissement et la création de valeur.",
-      "tags": ["business", "finance"]
+    "tech_visionnaire": {
+      "desc": "Curieux des innovations et des transformations du monde numérique, vous êtes attiré par l’intelligence artificielle, l’éthique technologique et les nouvelles frontières du progrès.",
+      "tags": ["technologie", "science", "societe"]
     },
 
     "investisseur_stratege": {
-      "desc": "Un profil orienté gestion financière, crypto, immobilier et recherche de revenus passifs.",
-      "tags": ["finance"]
+      "desc": "Vous réfléchissez en termes de long terme, d’optimisation et de stabilité financière. Budget, investissement et compréhension économique guident vos choix.",
+      "tags": ["finance", "societe", "developpement_personnel"]
     },
 
-    "tech_visionnaire": {
-      "desc": "Passionné par l'innovation, l'intelligence artificielle et les nouvelles technologies.",
-      "tags": ["technologie"]
+    "explorateur_intellectuel": {
+      "desc": "Passionné par la compréhension du monde, vous aimez les sciences, l’histoire et les découvertes qui élargissent votre vision.",
+      "tags": ["science", "histoire", "psychologie_sciences"]
     },
 
-    "intellectuel_cultive": {
-      "desc": "Une personne curieuse, attirée par la philosophie, la culture générale et l'apprentissage continu.",
-      "tags": ["culture"]
+    "eco_conscient": {
+      "desc": "Vous êtes sensible aux enjeux environnementaux et à la durabilité. Votre mode de vie tend vers un impact réduit et réfléchi.",
+      "tags": ["ecologie", "societe", "lifestyle"]
     },
 
-    "developpement_personnel": {
-      "desc": "Un individu centré sur la croissance intérieure, le mindset et l'amélioration continue.",
-      "tags": ["developpement_personnel"]
+    "epicurien_cultive": {
+      "desc": "La gastronomie, l’histoire culinaire et l’art de vivre occupent une place importante dans votre quotidien.",
+      "tags": ["gastronomie", "lifestyle", "histoire"]
     },
 
-    "lifestyle_equilibre": {
-      "desc": "Recherche l'équilibre entre vie personnelle, bien-être, organisation et qualité de vie.",
-      "tags": ["lifestyle", "healthy"]
+    "athlete_equilibre": {
+      "desc": "Performance physique, santé et discipline font partie intégrante de votre mode de vie. Vous cherchez l’équilibre corps-esprit.",
+      "tags": ["sport_sante", "developpement_personnel", "psychologie"]
     },
 
-    "leader_professionnel": {
-      "desc": "Un profil orienté leadership, management et progression de carrière.",
-      "tags": ["business", "developpement_personnel"]
+    "architecte_de_soi": {
+      "desc": "Vous travaillez continuellement sur vous-même : productivité, apprentissage, concentration et optimisation personnelle.",
+      "tags": ["developpement_personnel", "psychologie", "science"]
     },
 
-    "citoyen_engage": {
-      "desc": "Sensibilisé aux enjeux sociétaux, écologiques et à l'impact social.",
-      "tags": ["societe"]
+    "esthete_minimaliste": {
+      "desc": "Attiré par le minimalisme, l’architecture et les ambiances soignées, vous valorisez un style de vie réfléchi et esthétique.",
+      "tags": ["lifestyle", "societe", "ecologie"]
+    },
+
+    "analyste_psychologique": {
+      "desc": "Les comportements humains, les émotions et les dynamiques sociales vous fascinent profondément.",
+      "tags": ["psychologie", "societe", "science"]
     },
 
     "partenaire_engage": {
-      "desc": "Investi dans la vie de couple, la stabilité relationnelle et les projets communs.",
-      "tags": ["couple"]
+      "desc": "Les relations, la communication et l’intimité sont au cœur de vos intérêts. Vous valorisez la construction à deux.",
+      "tags": ["couple", "psychologie", "developpement_personnel"]
     },
 
-    "celibataire_explorateur": {
-      "desc": "Indépendant, curieux des rencontres et attaché à sa liberté personnelle.",
-      "tags": ["celibataire", "lifestyle"]
+    "independant_epanoui": {
+      "desc": "Autonomie, liberté personnelle et développement individuel guident votre manière de vivre.",
+      "tags": ["celibataire", "developpement_personnel", "lifestyle"]
+    },
+
+    "citoyen_du_monde": {
+      "desc": "Vous vous intéressez aux dynamiques géopolitiques et aux transformations globales qui façonnent notre société.",
+      "tags": ["geopolitique", "societe", "histoire"]
+    },
+
+    "strategiste_global": {
+      "desc": "Vous combinez vision économique, analyse géopolitique et compréhension sociétale pour anticiper les évolutions du monde.",
+      "tags": ["finance", "geopolitique", "societe"]
+    },
+
+    "scientifique_pragmatique": {
+      "desc": "Votre approche est rationnelle et basée sur les faits. Vous privilégiez les données et la compréhension scientifique.",
+      "tags": ["science", "technologie", "developpement_personnel"]
     }
+
   }
 }

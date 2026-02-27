@@ -5,14 +5,14 @@ let articlesData = [];
 let profile = {};
 
 // NOUVELLES VARIABLES POUR LE CHRONO
-let tempsDebut = null;
+let tempsDebut = 0;
 let articleEnCours = null;
 let tempsParArticle = JSON.parse(localStorage.getItem('tempsParArticle')) || {};
 
 document.addEventListener("DOMContentLoaded", () => {
 
     Promise.all([
-        fetch('articles.json').then(response => response.json()),
+        fetch('data/articles.json').then(response => response.json()),
         fetch('data/tagCategories.json').then(res => res.json())
     ])
     .then(([articles, tags]) => {

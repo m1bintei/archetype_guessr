@@ -10,6 +10,7 @@ let articleEnCours = null;
 let tempsParArticle = JSON.parse(localStorage.getItem('tempsParArticle')) || {};
 
 document.addEventListener("DOMContentLoaded", () => {
+    localStorage.clear(); // pour réinitialiser les données à chaque démarage
 
     Promise.all([
         fetch('data/articles.json').then(response => response.json()),

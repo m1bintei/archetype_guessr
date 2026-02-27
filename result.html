@@ -62,6 +62,9 @@ button:hover {
 <div class="container">
   <h1>Votre Profil</h1>
 
+  <h2>Infos personnelles</h2>
+  <div id="personal-info"></div>
+
   <div class="archetype-name" id="archetype-name">
     Calcul en cours...
   </div>
@@ -98,6 +101,7 @@ let archetypesData = {};
 
 //init
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("RESULT VERSION 2");
 
   fetch('data/archetype.json')
     .then(res => res.json())
@@ -117,8 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //calcul de l'archetype
 function calculateArchetype() {
 
-  let bestMatch = null;
-  let bestScore = -1;
+  const viewedArticles = JSON.parse(localStorage.getItem("viewedArticles")) || [];
+
+  let totalClicks = viewedArticles.length;
+
+  if (totalClicks < 3) { // minimum 3 clicks sur article
+    displayInsufficient(totalClicks);
+    return;
+  }
+
+  let scores = [];
 
   for (let archetypeKey in archetypesData) {
 
@@ -126,35 +138,102 @@ function calculateArchetype() {
     let score = 0;
 
     archetype.tags.forEach(tagCategory => {
+
+      // on ignore couple et celibataire dans le classement
+      if (tagCategory === "couple" || tagCategory === "celibataire") return;
+
       if (profile[tagCategory]) {
         score += profile[tagCategory];
       }
+
     });
 
-    if (score > bestScore) {
-      bestScore = score;
-      bestMatch = archetype;
-    }
+    scores.push({
+      key: archetypeKey,
+      desc: archetype.desc,
+      score: score
+    });
   }
 
-  displayResult(bestMatch);
+  // trier du plus grand au plus petit
+  scores.sort((a, b) => b.score - a.score);
+
+  // on garde les 3 premiers
+  const top3 = scores.slice(0, 3);
+  displayPersonalInfo()
+  displayTop3(top3);
+
 }
 
+function displayPersonalInfo() {
 
-//on affiche
-function displayResult(archetype) {
+  const personalDiv = document.getElementById("personal-info");
+
+  const coupleScore = profile["couple"] || 0;
+  const celibScore = profile["celibataire"] || 0;
+
+  // Aucun des deux
+  if (coupleScore === 0 && celibScore === 0) {
+    personalDiv.innerHTML = "";
+    return;
+  }
+
+  // on n'affiche rien
+  if (coupleScore === celibScore) {
+    personalDiv.innerHTML = "";
+    return;
+  }
+
+  if ((coupleScore > celibScore)&&(coupleScore>3)) {
+    personalDiv.innerHTML = "<p> Situation : En couple</p>";
+  } else if ((coupleScore < celibScore)&&(celibScore>3)) {
+    personalDiv.innerHTML = "<p> Situation : Célibataire</p>";
+  }else {
+    personalDiv.innerHTML = "";
+  }
+}
+ 
+
+function displayInsufficient(totalClicks) {
 
   const nameEl = document.getElementById("archetype-name");
   const descEl = document.getElementById("archetype-desc");
 
-  if (!archetype) {
+  nameEl.innerText = "Profil en cours de construction";
+  descEl.innerText = `Vous avez consulté ${totalClicks} article(s). Consultez au moins 10 articles pour révéler votre archétype.`;
+}
+
+
+//on affiche
+function displayTop3(top3) {
+
+  const nameEl = document.getElementById("archetype-name");
+  const descEl = document.getElementById("archetype-desc");
+
+  if (!top3 || top3.length < 3) {
     nameEl.innerText = "Profil insuffisant";
     descEl.innerText = "Consultez plus d'articles pour obtenir un résultat.";
     return;
   }
 
-  nameEl.innerText = archetype.desc ? archetype.desc.split(".")[0] : "Profil détecté";
-  descEl.innerText = archetype.desc;
+  // Nettoyage des noms (remplacer _ par espace + capitaliser)
+  function formatName(name) {
+    return name
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, l => l.toUpperCase());
+  }
+
+  const top1name = formatName(top3[0].key);
+  const top2name = formatName(top3[1].key);
+  const top3name = formatName(top3[2].key);
+
+  nameEl.innerText = `Vous êtes ${top1name}, ${top2name} et ${top3name}.`;
+
+  descEl.innerHTML = `
+    <p>Tout d'abord, ${top3[0].desc}</p>
+    <p>De plus, ${top3[1].desc}</p>
+    <p>On dit aussi de vous que ${top3[2].desc}</p>
+  `;
 }
 
 

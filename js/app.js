@@ -32,19 +32,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===============================
-// GESTION SORTIE PAGE (ROBUSTE)
+// SORTIES / PERTE DE FOCUS (INDISPENSABLE)
 // ===============================
 
-// Changement d’onglet / retour arrière / fermeture
 document.addEventListener("visibilitychange", () => {
     if (document.visibilityState === "hidden" && articleEnCours) {
         arreterChrono();
     }
 });
 
-// Navigation (retour accueil, refresh, etc.)
 window.addEventListener("pagehide", () => {
     if (articleEnCours) {
+        arreterChrono();
+    }
+});
+
+// ⛔️ CLIC PARTOUT AILLEURS QUE LA CARTE
+document.addEventListener("click", (e) => {
+    if (!articleEnCours) return;
+
+    const card = document.querySelector(
+        `[data-article-id="${articleEnCours}"]`
+    );
+
+    if (card && !card.contains(e.target)) {
         arreterChrono();
     }
 });
@@ -84,18 +95,19 @@ function displayArticles() {
         cardDiv.className = 'card';
         cardDiv.dataset.articleId = article.id;
 
-        // Hover → chrono
+        // 🟢 mouseenter = START
         cardDiv.addEventListener("mouseenter", () => {
             demarrerChrono(article.id);
         });
 
+        // 🔴 mouseleave = STOP
         cardDiv.addEventListener("mouseleave", () => {
             if (articleEnCours === article.id) {
                 arreterChrono();
             }
         });
 
-        // Click → arrêt + redirection
+        // CLICK = arrêt + redirection
         cardDiv.addEventListener("click", () => {
             track_redirect(article.id);
         });
@@ -135,15 +147,16 @@ function arreterChrono() {
     if (!tempsParArticle[articleEnCours]) {
         tempsParArticle[articleEnCours] = {
             id: articleEnCours,
-            tempsTotal: 0,
-            dernierTemps: null
+            tempsTotal: 0
         };
     }
 
     tempsParArticle[articleEnCours].tempsTotal += tempsPasse;
-    tempsParArticle[articleEnCours].dernierTemps = new Date().toISOString();
 
-    localStorage.setItem('tempsParArticle', JSON.stringify(tempsParArticle));
+    localStorage.setItem(
+        'tempsParArticle',
+        JSON.stringify(tempsParArticle)
+    );
 
     console.log(
         `⏱️ Article ${articleEnCours} : +${tempsPasse}s (total ${tempsParArticle[articleEnCours].tempsTotal}s)`
@@ -174,7 +187,10 @@ function track_redirect(articleId) {
         });
     }
 
-    localStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
+    localStorage.setItem(
+        'viewedArticles',
+        JSON.stringify(viewedArticles)
+    );
 
     updateProfile(articleId);
 
@@ -182,7 +198,7 @@ function track_redirect(articleId) {
 }
 
 // ===============================
-// PROFIL / TAGS
+// TAGS → PROFIL
 // ===============================
 
 function updateProfile(articleId) {
@@ -196,11 +212,14 @@ function updateProfile(articleId) {
         }
     });
 
-    localStorage.setItem("profile", JSON.stringify(profile));
+    localStorage.setItem(
+        "profile",
+        JSON.stringify(profile)
+    );
 }
 
 // ===============================
-// NAVIGATION RESULTAT
+// RESULT PAGE
 // ===============================
 
 function goToResult() {
@@ -211,7 +230,7 @@ function goToResult() {
 }
 
 // ===============================
-// DEBUG CONSOLE
+// DEBUG
 // ===============================
 
 window.stats = {
@@ -222,12 +241,10 @@ window.stats = {
         console.table(viewedArticles);
     },
     reset() {
-        localStorage.removeItem('tempsParArticle');
-        localStorage.removeItem('viewedArticles');
-        localStorage.removeItem('profile');
+        localStorage.clear();
         tempsParArticle = {};
         viewedArticles = [];
         profile = {};
-        console.log("🧹 Stats réinitialisées");
+        console.log("🧹 Données réinitialisées");
     }
 };

@@ -10,7 +10,8 @@ let articleEnCours = null;
 let tempsParArticle = JSON.parse(localStorage.getItem('tempsParArticle')) || {};
 
 document.addEventListener("DOMContentLoaded", () => {
-    localStorage.clear(); // pour réinitialiser les données à chaque démarage
+    // MODIFICATION: Commenté pour ne pas effacer les données à chaque démarrage
+    // localStorage.clear(); // pour réinitialiser les données à chaque démarage
 
     Promise.all([
         fetch('data/articles.json').then(response => response.json()),
@@ -35,6 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
             arreterChrono();
         }
     });
+
+    // AJOUT: Sauvegarde périodique pour les longues lectures
+    setInterval(() => {
+        if (articleEnCours && tempsDebut) {
+            const tempsActuel = Math.floor((Date.now() - tempsDebut) / 1000);
+            console.log(`⏱️ Lecture en cours: article ${articleEnCours} - ${tempsActuel} secondes`);
+        }
+    }, 10000); // Affiche toutes les 10 secondes
 
 });
 
@@ -104,7 +113,7 @@ function demarrerChrono(articleId) {
     // Démarrer le chrono pour ce nouvel article
     articleEnCours = articleId;
     tempsDebut = Date.now();
-    //console.log("⏱️ Lecture début: article " + articleId); //DEBUG
+    console.log("⏱️ Lecture début: article " + articleId); // DÉCOMMENTÉ pour voir le début
 }
 
 // NOUVELLE FONCTION : Arrêter le chrono et sauvegarder
@@ -129,7 +138,7 @@ function arreterChrono() {
         // Sauvegarder
         localStorage.setItem('tempsParArticle', JSON.stringify(tempsParArticle));
         
-        //console.log(`⏱️ Lecture fin: article ${articleEnCours} - ${tempsPasse} secondes (total: ${tempsParArticle[articleEnCours].tempsTotal}s)`);
+        console.log(`⏱️ Lecture fin: article ${articleEnCours} - ${tempsPasse} secondes (total: ${tempsParArticle[articleEnCours].tempsTotal}s)`); // DÉCOMMENTÉ
         
         // Remettre à zéro
         articleEnCours = null;
@@ -210,4 +219,3 @@ window.stats = {
         console.log("Toutes les stats ont été réinitialisées");
     }
 };
-

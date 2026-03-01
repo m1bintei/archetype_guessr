@@ -90,7 +90,7 @@ Dans un site web ordinaire, des mécanismes discrets collectent des données san
 - Navigateur moderne (Chrome, Firefox, Edge)
 - Python 3 (pour le serveur local)
 
-  ### Étapes d'installation
+### Étapes d'installation
 1. Cloner le dépôt
 git clone https://github.com/m1bintei/archetype_guessr.git
 
@@ -103,7 +103,7 @@ python -m http.server 8000
 4. Ouvrir dans le navigateur
 http://localhost:8000
 
- ## 📖 Utilisation
+ ## Utilisation
 
 ### Navigation de base
 - **Page d'accueil** : Parcourez les 10 articles aléatoires

@@ -2,8 +2,9 @@
 
 ## Contexte académique
 
-Ce projet est réalisé dans le cadre du cours **8INF886 – Gestion de la cybersécurité et des données personnelles** (Université du Québec à Chicoutimi).  
-Il a pour objectif de **rendre visibles des mécanismes habituellement invisibles** de collecte et de traitement des données personnelles.
+Ce projet est réalisé dans le cadre du cours **8INF886 – Gestion de la cybersécurité et des données personnelles** (Université du Québec à Chicoutimi). 
+Il a pour but de mettre en lumière le mécanisme de récolte et traitement des données utilisateurs afin de ciblé au mieux son archetype. Dans ce projet, nous mettons en place un site web, avec des articles sur des sujets varié, qui, au bout d'un certain temps d'utilisation, va nous permettre de ciblé au mieux les centres d'intérêts, l'âge, le genre et la situation de l'utilisateur, cad **rendre visibles des mécanismes habituellement invisibles** de collecte et de traitement des données personnelles.
+
 
 **Thématique démontrée :**  
 > *"Ce qui se passe quand je navigue sur un site classique : traçage invisible, profilage comportemental et exploitation des données."*

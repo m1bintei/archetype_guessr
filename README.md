@@ -1,13 +1,15 @@
 # archetype_guessr
 
 > **Rendre visible l'invisible** – Une démonstration pédagogique de collecte et profilage de données.
+> 
 # Réalisé par
-Lina Bedar
-Maxime Bentein
-Oum el kheir Righi
-Maelen Tiger
+|Lina Bedar|
+|Maxime Bentein|
+|Oum el kheir Righi|
+|Maelen Tiger|
 
-Encadré par : Samuel Desbiens (s6desbie@uqac.ca) - Ilyes Manai (emanai@uqac.ca)
+
+**Encadré par :**  Samuel Desbiens (s6desbie@uqac.ca) - Ilyes Manai (emanai@uqac.ca)
 
 ---
 

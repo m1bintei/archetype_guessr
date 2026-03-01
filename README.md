@@ -90,7 +90,7 @@ Dans un site web ordinaire, des mécanismes discrets collectent des données san
 - Navigateur moderne (Chrome, Firefox, Edge)
 - Python 3 (pour le serveur local)
 
-### Étapes d'installation
+  ### Étapes d'installation
 
 ```bash
 # 1. Cloner le dépôt
@@ -105,7 +105,7 @@ python -m http.server 8000
 # 4. Ouvrir dans le navigateur
 http://localhost:8000
 
-## 📖 Utilisation
+ ## 📖 Utilisation
 
 ### Navigation de base
 - **Page d'accueil** : Parcourez les 10 articles aléatoires
@@ -121,3 +121,7 @@ stats.articles.voirTemps()      // Voir le temps par article
 stats.pubs.voirTemps()           // Voir les stats des publicités
 stats.pubs.voirHistorique()      // Voir l'historique des survols
 stats.reset()                    // Réinitialiser toutes les données
+
+
+
+

@@ -1,6 +1,6 @@
 # archetype_guessr
 
-## 🎓 Contexte académique
+## Contexte académique
 
 Ce projet est réalisé dans le cadre du cours **8INF886 – Gestion de la cybersécurité et des données personnelles** (Université du Québec à Chicoutimi).  
 Il a pour objectif de **rendre visibles des mécanismes habituellement invisibles** de collecte et de traitement des données personnelles.

@@ -63,5 +63,3 @@ python -m http.server 8000
 
 # 3. Accéder à l'application
 http://localhost:8000
-
-###  Important : L’application doit être servie via HTTP (pas en file://) pour que les appels fetch() fonctionnent correctement.

@@ -1,23 +1,7 @@
 # archetype_guessr
 
 > **Rendre visible l'invisible** – Une démonstration pédagogique de collecte et profilage de données.
-
----
-## Table des matières
-- [Contexte académique](#-contexte-académique)
-- [Problématique](#-problématique)
-- [Fonctionnalités](#-fonctionnalités)
-- [Démonstration vidéo](#-démonstration-vidéo)
-- [Installation](#-installation)
-- [Utilisation](#-utilisation)
-- [Scénarios de test](#-scénarios-de-test)
-- [Données collectées](#-données-collectées)
-- [Mécanismes invisibles](#-mécanismes-invisibles-démontrés)
-- [Architecture technique](#-architecture-technique)
-- [Limites du projet](#-limites-du-projet)
-- [Piste d'atténuation](#-piste-datténuation)
-- [Équipe](#-équipe)
-- [Licence](#-licence)
+Réalisé par:
 
 ---
 
@@ -112,3 +96,11 @@ python -m http.server 8000
 
 # 4. Ouvrir dans le navigateur
 http://localhost:8000
+
+Réalisé par
+Nom	Rôle
+[Votre nom]	Tracking publicités + README
+[Nom collègue 1]	Chrono articles + profil
+[Nom collègue 2]	JSON + articles
+[Nom collègue 3]	UI/Design
+Encadré par : Samuel Desbiens (s6desbie@uqac.ca)

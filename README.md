@@ -105,3 +105,19 @@ python -m http.server 8000
 # 4. Ouvrir dans le navigateur
 http://localhost:8000
 
+## 📖 Utilisation
+
+### Navigation de base
+- **Page d'accueil** : Parcourez les 10 articles aléatoires
+- **Survol** : Passez la souris sur les cartes pour démarrer le chrono
+- **Publicités** : Survolez les bannières qui clignotent (tracking visible par un point rouge)
+- **Lecture** : Cliquez sur "Lire l'article" pour accéder à l'article complet
+- **Profil** : Cliquez sur "Mon Profil" pour voir vos données collectées
+
+### Raccourcis console
+```javascript
+// Dans la console (F12), tapez :
+stats.articles.voirTemps()      // Voir le temps par article
+stats.pubs.voirTemps()           // Voir les stats des publicités
+stats.pubs.voirHistorique()      // Voir l'historique des survols
+stats.reset()                    // Réinitialiser toutes les données

@@ -97,7 +97,7 @@ python -m http.server 8000
 # 4. Ouvrir dans le navigateur
 http://localhost:8000
 
-Réalisé par
+### Réalisé par
 Nom	Rôle
 [Votre nom]	Tracking publicités + README
 [Nom collègue 1]	Chrono articles + profil

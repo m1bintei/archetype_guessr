@@ -31,6 +31,13 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch(err => console.error("Erreur chargement JSON :", err));
 });
 
+// Affichage de nouveau articles lorsque l'on revient sur la page principal'
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+        displayArticles();
+    }
+});
+
 // ===============================
 // SORTIES / PERTE DE FOCUS (INDISPENSABLE)
 // ===============================

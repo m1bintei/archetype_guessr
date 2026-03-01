@@ -1,7 +1,13 @@
 # archetype_guessr
 
 > **Rendre visible l'invisible** – Une démonstration pédagogique de collecte et profilage de données.
-Réalisé par:
+# Réalisé par
+Lina Bedar
+Maxime Bentein
+Oum el kheir Righi
+Maelen Tiger
+
+Encadré par : Samuel Desbiens (s6desbie@uqac.ca) - Ilyes Manai (emanai@uqac.ca)
 
 ---
 
@@ -86,7 +92,7 @@ Dans un site web ordinaire, des mécanismes discrets collectent des données san
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/votre-username/archetype_guessr.git
+git clone https://github.com/m1bintei/archetype_guessr.git
 
 # 2. Se déplacer dans le dossier
 cd archetype_guessr
@@ -97,10 +103,3 @@ python -m http.server 8000
 # 4. Ouvrir dans le navigateur
 http://localhost:8000
 
-### Réalisé par
-Nom	Rôle
-[Votre nom]	Tracking publicités + README
-[Nom collègue 1]	Chrono articles + profil
-[Nom collègue 2]	JSON + articles
-[Nom collègue 3]	UI/Design
-Encadré par : Samuel Desbiens (s6desbie@uqac.ca)

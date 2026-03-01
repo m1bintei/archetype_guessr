@@ -91,16 +91,16 @@ Dans un site web ordinaire, des mécanismes discrets collectent des données san
 - Python 3 (pour le serveur local)
 
   ### Étapes d'installation
-# 1. Cloner le dépôt
+1. Cloner le dépôt
 git clone https://github.com/m1bintei/archetype_guessr.git
 
-# 2. Se déplacer dans le dossier
+2. Se déplacer dans le dossier
 cd archetype_guessr
 
-# 3. Lancer le serveur local
+3. Lancer le serveur local
 python -m http.server 8000
 
-# 4. Ouvrir dans le navigateur
+4. Ouvrir dans le navigateur
 http://localhost:8000
 
  ## 📖 Utilisation

@@ -1,7 +1,15 @@
 # archetype_guessr
 
 > **Rendre visible l'invisible** – Une démonstration pédagogique de collecte et profilage de données.
-Réalisé par:
+> 
+# Réalisé par
+- **Lina Bedar**
+- **Maxime Bentein**
+- **Oum el kheir Righi**
+- **Maelen Tiger**
+
+
+**Encadré par :**  Samuel Desbiens (s6desbie@uqac.ca) - Ilyes Manai (emanai@uqac.ca)
 
 ---
 
@@ -83,24 +91,35 @@ Dans un site web ordinaire, des mécanismes discrets collectent des données san
 - Python 3 (pour le serveur local)
 
 ### Étapes d'installation
+1. Cloner le dépôt
+git clone https://github.com/m1bintei/archetype_guessr.git
 
-```bash
-# 1. Cloner le dépôt
-git clone https://github.com/votre-username/archetype_guessr.git
-
-# 2. Se déplacer dans le dossier
+2. Se déplacer dans le dossier
 cd archetype_guessr
 
-# 3. Lancer le serveur local
+3. Lancer le serveur local
 python -m http.server 8000
 
-# 4. Ouvrir dans le navigateur
+4. Ouvrir dans le navigateur
 http://localhost:8000
 
-### Réalisé par
-Nom	Rôle
-[Votre nom]	Tracking publicités + README
-[Nom collègue 1]	Chrono articles + profil
-[Nom collègue 2]	JSON + articles
-[Nom collègue 3]	UI/Design
-Encadré par : Samuel Desbiens (s6desbie@uqac.ca)
+ ## Utilisation
+
+### Navigation de base
+- **Page d'accueil** : Parcourez les 10 articles aléatoires
+- **Survol** : Passez la souris sur les cartes pour démarrer le chrono
+- **Publicités** : Survolez les bannières qui clignotent 
+- **Lecture** : Cliquez sur "Lire l'article" pour accéder à l'article complet
+- **Profil** : Cliquez sur "Mon Profil" pour voir vos données collectées
+
+### Raccourcis console
+```javascript
+// Dans la console (F12), tapez :
+stats.articles.voirTemps()      // Voir le temps par article
+stats.pubs.voirTemps()           // Voir les stats des publicités
+stats.pubs.voirHistorique()      // Voir l'historique des survols
+stats.reset()                    // Réinitialiser toutes les données
+
+
+
+

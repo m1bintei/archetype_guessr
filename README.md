@@ -108,7 +108,7 @@ http://localhost:8000
 ### Navigation de base
 - **Page d'accueil** : Parcourez les 10 articles aléatoires
 - **Survol** : Passez la souris sur les cartes pour démarrer le chrono
-- **Publicités** : Survolez les bannières qui clignotent (tracking visible par un point rouge)
+- **Publicités** : Survolez les bannières qui clignotent 
 - **Lecture** : Cliquez sur "Lire l'article" pour accéder à l'article complet
 - **Profil** : Cliquez sur "Mon Profil" pour voir vos données collectées
 

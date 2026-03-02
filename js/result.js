@@ -81,7 +81,7 @@ function buildWeightedProfile() {
 function calculateArchetype() {
 
     let totalClicks = articleData.length;
-    if (totalClicks < 3) { // minimum 3 clicks sur article
+    if (totalClicks < 5) { // minimum 5 clicks sur article
         displayInsufficient(totalClicks);
         return;
     }
@@ -160,7 +160,7 @@ function displayInsufficient(totalClicks) {
     const descEl = document.getElementById("archetype-desc");
 
     nameEl.innerText = "Profil en cours de construction";
-    descEl.innerText = `Vous avez consulté ${totalClicks} article(s). Consultez au moins 10 articles pour révéler votre archétype.`;
+    descEl.innerText = `Vous avez consulté ${totalClicks} article(s). Consultez au moins 5 articles pour révéler votre archétype.`;
 }
 
 

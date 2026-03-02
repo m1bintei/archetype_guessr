@@ -69,6 +69,18 @@ button {
 button:hover {
     background:#5848c2;
 }
+.badge-info {
+    display: inline-block;
+    background: #f0f4f8;
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: #2c3e50;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
 </style>
 </head>
 
@@ -91,217 +103,7 @@ button:hover {
   <button onclick="goHome()">Retour Accueil</button>
 </div>
 
-<script>
-
-
-//chargement du profil utilisateur du type :
-/*
-let profile = {
-  healthy: 0,
-  finance: 0,
-  productivite: 0,
-  technologie: 0,
-  developpement_personnel: 0,
-  lifestyle: 0,
-  culture: 0,
-  sport_performance: 0,
-  business: 0,
-  societe: 0,
-  couple: 0,
-  celibataire: 0
-};
-*/
-const tempsParArticle = JSON.parse(localStorage.getItem("tempsParArticle")) || {};
-const profile = buildWeightedProfile();
-
-let archetypesData = {};
-
-
-//init
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("RESULT VERSION 2");
-
-  fetch('data/archetype.json')
-    .then(res => res.json())
-    .then(data => {
-
-      archetypesData = data.archetypes;
-      calculateArchetype();
-
-    })
-    .catch(err => {
-      console.error("Erreur chargement archetypes :", err);
-    });
-
-});
-
-function buildWeightedProfile() {
-
-  const articles = JSON.parse(localStorage.getItem("articlesData")) || [];
-  const tempsParArticle = JSON.parse(localStorage.getItem("tempsParArticle")) || {};
- 
-
-  let weightedProfile = {};
-
-  articles.forEach(article => {
-
-    const temps = tempsParArticle[article.id] || 0;
-
-    let weight = 1;
-
-    if (temps > 180) { // en sec
-      weight = 2;
-    } else if (temps > 40) { 
-      weight = 1;
-    } else {
-      weight = 0.5;
-    }
-
-    article.tags.forEach(tag => {
-
-      if (!weightedProfile[tag]) {
-        weightedProfile[tag] = 0;
-      }
-
-      weightedProfile[tag] += weight;
-
-    });
-
-  });
-
-  return weightedProfile;
-}
-
-//calcul de l'archetype
-function calculateArchetype() {
-
-  const viewedArticles = JSON.parse(localStorage.getItem("viewedArticles")) || [];
-
-  let totalClicks = viewedArticles.length;
-
-  if (totalClicks < 5) { // minimum 5 clicks sur article
-    displayInsufficient(totalClicks);
-    return;
-  }
-
-  let scores = [];
-
-  for (let archetypeKey in archetypesData) {
-
-    let archetype = archetypesData[archetypeKey];
-    let score = 0;
-
-    archetype.tags.forEach(tagCategory => {
-
-      // on ignore couple et celibataire dans le classement
-      if (tagCategory === "couple" || tagCategory === "celibataire") return;
-
-      if (profile[tagCategory]) {
-        score += profile[tagCategory];
-      }
-
-    });
-
-    scores.push({
-      key: archetypeKey,
-      desc: archetype.desc,
-      score: score
-    });
-  }
-
-  // trier du plus grand au plus petit
-  scores.sort((a, b) => b.score - a.score);
-
-  // on garde les 3 premiers
-  const top3 = scores.slice(0, 3);
-  displayPersonalInfo()
-  displayTop3(top3);
-
-}
-
-function displayPersonalInfo() {
-
-  const personalDiv = document.getElementById("personal-info");
-
-  const coupleScore = profile["couple"] || 0;
-  const celibScore = profile["celibataire"] || 0;
-
-  // Aucun des deux
-  if (coupleScore === 0 && celibScore === 0) {
-    personalDiv.innerHTML = "";
-    return;
-  }
-
-  // on n'affiche rien
-  if (coupleScore === celibScore) {
-    personalDiv.innerHTML = "";
-    return;
-  }
-
-  if ((coupleScore > celibScore)&&(coupleScore>3)) {
-    personalDiv.innerHTML = "<p> Situation : En couple</p>";
-  } else if ((coupleScore < celibScore)&&(celibScore>3)) {
-    personalDiv.innerHTML = "<p> Situation : Célibataire</p>";
-  }else {
-    personalDiv.innerHTML = "";
-  }
-}
- 
-
-function displayInsufficient(totalClicks) {
-
-  const nameEl = document.getElementById("archetype-name");
-  const descEl = document.getElementById("archetype-desc");
-
-  nameEl.innerText = "Profil en cours de construction";
-  descEl.innerText = `Vous avez consulté ${totalClicks} article(s). Consultez au moins 5 articles pour révéler votre archétype.`;
-}
-
-
-//on affiche
-function displayTop3(top3) {
-
-  const nameEl = document.getElementById("archetype-name");
-  const descEl = document.getElementById("archetype-desc");
-
-  if (!top3 || top3.length < 3) {
-    nameEl.innerText = "Profil insuffisant";
-    descEl.innerText = "Consultez plus d'articles pour obtenir un résultat.";
-    return;
-  }
-
-  // Nettoyage des noms (remplacer _ par espace + capitaliser)
-  function formatName(name) {
-    return name
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, l => l.toUpperCase());
-  }
-
-  const top1name = formatName(top3[0].key);
-  const top2name = formatName(top3[1].key);
-  const top3name = formatName(top3[2].key);
-
-  nameEl.innerText = `Vous êtes ${top1name}, ${top2name} et ${top3name}.`;
-
-  descEl.innerHTML = `
-    <p>Tout d'abord, ${top3[0].desc}</p>
-    <p>De plus, ${top3[1].desc}</p>
-    <p>On dit aussi de vous que ${top3[2].desc}</p>
-  `;
-}
-
-
-
-function goHome() {
-  window.location.href = "index.html";
-}
-
-function clearData(){
-  localStorage.clear();
-  window.location.reload();
-}
-
-</script>
+<script src="js/result.js"></script>
 
 </body>
 </html>

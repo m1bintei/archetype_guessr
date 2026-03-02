@@ -5,6 +5,8 @@
 let viewedArticles = JSON.parse(localStorage.getItem('viewedArticles')) || [];
 let tagCategories = {};
 let articlesData = [];
+
+let viewedPub = JSON.parse(localStorage.getItem('viewedPub')) || [];
 let profile = {};
 let pubData = [];
 
@@ -160,29 +162,31 @@ function arreterChrono() {
 
     const tempsPasse = Math.floor((Date.now() - tempsDebut) / 1000);
 
-    //RECUP DU TEMPS DE SURVOL DE L'ARTICLE
-    let articleEntry = viewedArticles.find(a => a && a.id == articleEnCours);
+    if(tempsPasse > 0.5){
+        //RECUP DU TEMPS DE SURVOL DE L'ARTICLE
+        let articleEntry = viewedArticles.find(a => a && a.id == articleEnCours);
 
-    if(articleEntry){ //AJOUT TEMPS SI OBJ DEJA EXISTANT
-        articleEntry.tempsSurvol = (articleEntry.tempsSurvol || 0) + tempsPasse;
-    } else { //CREE OBJET SI INEXISTANT
-        articleEntry = {
-            id: articleEnCours,
-            consultationNumber: 0,
-            tempsTotal: 0,
-            tempsSurvol: tempsPasse
-        };
-        viewedArticles.push(articleEntry);
+        if(articleEntry){ //AJOUT TEMPS SI OBJ DEJA EXISTANT
+            articleEntry.tempsSurvol = (articleEntry.tempsSurvol || 0) + tempsPasse;
+        } else { //CREE OBJET SI INEXISTANT
+            articleEntry = {
+                id: articleEnCours,
+                consultationNumber: 0,
+                tempsTotal: 0,
+                tempsSurvol: tempsPasse
+            };
+            viewedArticles.push(articleEntry);
+        }
+        //SAUVEGARDE DU TEMPS
+        localStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
+
+        console.log(
+            `⏱️ Article ${articleEnCours} : +${tempsPasse}s (total ${articleEntry.tempsSurvol}s)`
+        );
+
+        articleEnCours = null;
+        tempsDebut = null;
     }
-    //SAUVEGARDE DU TEMPS
-    localStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
-
-    console.log(
-        `⏱️ Article ${articleEnCours} : +${tempsPasse}s (total ${articleEntry.tempsSurvol}s)`
-    );
-
-    articleEnCours = null;
-    tempsDebut = null;
 }
 
 // ===============================
@@ -268,6 +272,19 @@ function displayAd() {
         leftSelection.forEach(publicite => {
 
             const cardDiv = document.createElement('div');
+
+            cardDiv.addEventListener("mouseenter", () => {
+                startChronoAd(publicite.id, publicite.tags);
+            });
+
+            cardDiv.addEventListener("mouseleave", () => {
+                stopChronoAd();
+            });
+
+            cardDiv.addEventListener("click", () => {
+                trackAdClick(publicite.id);
+            });
+
             cardDiv.className = 'card';
             cardDiv.dataset.pubId = publicite.id;
 
@@ -287,6 +304,19 @@ function displayAd() {
         rightSelection.forEach(publicite => {
 
             const cardDiv = document.createElement('div');
+
+            cardDiv.addEventListener("mouseenter", () => {
+                startChronoAd(publicite.id, publicite.tags);
+            });
+
+            cardDiv.addEventListener("mouseleave", () => {
+                stopChronoAd();
+            });
+
+            cardDiv.addEventListener("click", () => {
+                trackAdClick(publicite.id);
+            });
+
             cardDiv.className = 'card';
             cardDiv.dataset.pubId = publicite.id;
 
@@ -311,31 +341,45 @@ function startChronoAd(adId, tags) {
 function stopChronoAd(){ //A FINIR
     if (!adEnCours || !tempsDebutAd) return;
 
-    const tempsPasse = (Date.now() - tempsDebutAd) / 1000; // en secondes
+    const tempsPasse = Math.floor((Date.now() - tempsDebutAd) / 1000); // en secondes
 
-    if (!tempsParPub[adEnCours.id]) {
-        tempsParPub[adEnCours.id] = 0;
-    }
-    tempsParPub[adEnCours.id] += tempsPasse;
-    localStorage.setItem('tempsParArticle', JSON.stringify(tempsParArticle));
-
-    // On ajoute des points au profil si survol > 0.5s
     if (tempsPasse > 0.5) {
-        adEnCours.tags.forEach(tag => {
-            const category = tagCategories[tag];
-            if (category) {
-                if (!profile[category]) profile[category] = 0;
-                profile[category] += tempsPasse * 2; // 2 points par seconde de survol
-            }
-        });
+        let adEntry = viewedPub.find(p => p && p.id == adEnCours.id);
+        if (adEntry) {
+            adEntry.tempsSurvol = (adEntry.tempsSurvol || 0) + tempsPasse;
+        } else {
+            // 2. On assigne l'objet à pubEntry ET on le push
+            adEntry = {
+                id: adEnCours.id,
+                clic: 0,
+                tempsSurvol: tempsPasse
+            };
+            viewedPub.push(adEntry);
+        }
+        localStorage.setItem('viewedPub', JSON.stringify(viewedPub));
         localStorage.setItem("profile", JSON.stringify(profile));
-        // console.log(`👀 Pub survolée (${adEnCours.id}) : +${(tempsPasse * 2).toFixed(1)} points`);
     }
 
     adEnCours = null;
     tempsDebutAd = null;
 }
 
+function trackAdClick(adId){
+    console.log(`Pub ${adId} cliqué`);
+    let adEntry = viewedPub.find(p => p && p.id == adEnCours.id);
+    if (adEntry) {
+        adEntry.clics = (adEntry.clics || 0) + 1;
+    } else {
+        adEntry = {
+            id: adId,
+            clics: 1,
+            tempsSurvol: 0
+        };
+        viewedPub.push(adEntry);
+    }
+
+    localStorage.setItem('viewedPub', JSON.stringify(viewedPub));
+}
 
 // ===============================
 // DEBUG
@@ -348,10 +392,14 @@ window.stats = {
     voirConsultations() {
         console.table(viewedArticles);
     },
+    voirPub(){
+        console.table(viewedPub)
+    },
     reset() {
         localStorage.clear();
         tempsParArticle = {};
         viewedArticles = [];
+        viewedPub = []
         profile = {};
         console.log("🧹 Données réinitialisées");
     }

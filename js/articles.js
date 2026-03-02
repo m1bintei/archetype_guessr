@@ -2,7 +2,7 @@
 const fileName = window.location.pathname.split("/").pop();
 const match = fileName.match(/article_(\d+)\.html/);
 const articleId = match ? match[1] : null;
-if(articleId==null){ console.error("ID inconnu")};
+if(articleId==null) console.error("ID inconnu");
 
 // CALCUL DU TEMPS DE LECTURE
 

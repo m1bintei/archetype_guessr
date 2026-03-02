@@ -198,15 +198,15 @@ function track_redirect(articleId) {
     if (articleEnCours === articleId) {
         arreterChrono();
     }
-    let entry = viewedArticles.find(a => a.id === articleId);
-
+    let entry = viewedArticles.find(a => a && a.id == articleId);
     if (entry) {
         entry.consultationNumber++;
     } else {
         viewedArticles.push({
             id: articleId,
             consultationNumber: 1,
-            tempsTotal: 0
+            tempsTotal: 0,
+            tempsSurvol: 0
         });
     }
 
@@ -381,14 +381,13 @@ function trackAdClick(adId){
     localStorage.setItem('viewedPub', JSON.stringify(viewedPub));
 }
 
+
+
 // ===============================
 // DEBUG
 // ===============================
 
 window.stats = {
-    voirTemps() {
-        console.table(tempsParArticle);
-    },
     voirConsultations() {
         console.table(viewedArticles);
     },

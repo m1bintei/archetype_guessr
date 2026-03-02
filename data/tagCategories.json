@@ -1,7 +1,4 @@
 {
-  /* ========================= */
-  /* ===== E-COMMERCE ======== */
-  /* ========================= */
 
   "bague": "bijou",
   "bijou": "bijou",
@@ -128,10 +125,6 @@
   "decouverte": "science",
 
   "premium": "premium",
-
-  /* ========================= */
-  /* ===== ARTICLES ========= */
-  /* ========================= */
 
   "chronobiologie": "psychologie_sciences",
   "intelligence": "psychologie_sciences",

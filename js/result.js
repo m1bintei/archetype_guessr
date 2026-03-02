@@ -6,8 +6,8 @@
 */
 
 
-const articleData = JSON.parse(localStorage.getItem("viewedArticles")) || {};
-const pubData = JSON.parse(localStorage.getItem("viewedPub")) || {};
+const articleData = JSON.parse(localStorage.getItem("viewedArticles")) || [];
+const pubData = JSON.parse(localStorage.getItem("viewedPub")) || [];
 
 let profile = {};
 let archetypesData = {};
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         calculateArchetype();
     })
     .catch(err => {
-        console.error("Erreur chargement archetypes :", err);
+        console.error("Erreur chargement :", err);
     });
 
 });
@@ -51,7 +51,7 @@ function buildWeightedProfile() {
         const survol = article.tempsSurvol || 0;
 
         if (temps > 90) weight = 3;
-        else if (temps > 20) weight = 1.5;
+        else if (temps > 2) weight = 1.5;
 
         original.tags.forEach(tag => {
             weightedProfile[tag] = (weightedProfile[tag] || 0) + weight;
@@ -187,13 +187,15 @@ function displayTop3(top3) {
     const top2name = formatName(top3[1].key);
     const top3name = formatName(top3[2].key);
 
-    nameEl.innerText = `Vous êtes ${top1name}, ${top2name} et ${top3name}.`;
+    nameEl.innerText = `Vous êtes ${top1name}.`;
+    // nameEl.innerText = `Vous êtes ${top1name}, ${top2name} et ${top3name}.`;
+
 
     descEl.innerHTML = `
-    <p>Tout d'abord, ${top3[0].desc}</p>
-    <p>De plus, ${top3[1].desc}</p>
-    <p>On dit aussi de vous que ${top3[2].desc}</p>
+    <p>On dit de vous que, ${top3[0].desc}</p>
     `;
+    //<p>De plus, ${top3[1].desc}</p>
+    //<p>On dit aussi de vous que ${top3[2].desc}</p>
 }
 
 

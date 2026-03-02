@@ -6,11 +6,17 @@ let viewedArticles = JSON.parse(localStorage.getItem('viewedArticles')) || [];
 let tagCategories = {};
 let articlesData = [];
 let profile = {};
+let pubData = [];
 
 // CHRONO
 let tempsDebut = null;
 let articleEnCours = null;
 let tempsParArticle = JSON.parse(localStorage.getItem('tempsParArticle')) || {};
+
+// PUB
+let adEnCours = null;
+let tempsDebutAd = null;
+
 
 // ===============================
 // INITIALISATION
@@ -20,13 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     Promise.all([
         fetch('data/articles.json').then(res => res.json()),
-        fetch('data/tagCategories.json').then(res => res.json())
+        fetch('data/tagCategories.json').then(res => res.json()),
+        fetch('data/publicite.json').then(res =>res.json())
     ])
-    .then(([articles, tags]) => {
+    .then(([articles, tags, publicite]) => {
         articlesData = articles;
         tagCategories = tags;
+        pubData = publicite;
         initProfile();
         displayArticles();
+        displayAd();
     })
     .catch(err => console.error("Erreur chargement JSON :", err));
 });
@@ -124,7 +133,7 @@ function displayArticles() {
             <h3>${article.title}</h3>
             <p>${article.description}</p>
             <span class="time">${article.readingTime} min</span>
-            <a href="articles/article_${article.id}.html">Lire l'article</a>
+            <a href="data/articles/article_${article.id}.html">Lire l'article</a>
         `;
 
         container.appendChild(cardDiv);
@@ -151,22 +160,25 @@ function arreterChrono() {
 
     const tempsPasse = Math.floor((Date.now() - tempsDebut) / 1000);
 
-    if (!tempsParArticle[articleEnCours]) {
-        tempsParArticle[articleEnCours] = {
+    //RECUP DU TEMPS DE SURVOL DE L'ARTICLE
+    let articleEntry = viewedArticles.find(a => a && a.id == articleEnCours);
+
+    if(articleEntry){ //AJOUT TEMPS SI OBJ DEJA EXISTANT
+        articleEntry.tempsSurvol = (articleEntry.tempsSurvol || 0) + tempsPasse;
+    } else { //CREE OBJET SI INEXISTANT
+        articleEntry = {
             id: articleEnCours,
-            tempsTotal: 0
+            consultationNumber: 0,
+            tempsTotal: 0,
+            tempsSurvol: tempsPasse
         };
+        viewedArticles.push(articleEntry);
     }
-
-    tempsParArticle[articleEnCours].tempsTotal += tempsPasse;
-
-    localStorage.setItem(
-        'tempsParArticle',
-        JSON.stringify(tempsParArticle)
-    );
+    //SAUVEGARDE DU TEMPS
+    localStorage.setItem('viewedArticles', JSON.stringify(viewedArticles));
 
     console.log(
-        `⏱️ Article ${articleEnCours} : +${tempsPasse}s (total ${tempsParArticle[articleEnCours].tempsTotal}s)`
+        `⏱️ Article ${articleEnCours} : +${tempsPasse}s (total ${articleEntry.tempsSurvol}s)`
     );
 
     articleEnCours = null;
@@ -177,12 +189,11 @@ function arreterChrono() {
 // REDIRECTION & TRACKING
 // ===============================
 
-function track_redirect(articleId) {
 
+function track_redirect(articleId) {
     if (articleEnCours === articleId) {
         arreterChrono();
     }
-
     let entry = viewedArticles.find(a => a.id === articleId);
 
     if (entry) {
@@ -190,7 +201,8 @@ function track_redirect(articleId) {
     } else {
         viewedArticles.push({
             id: articleId,
-            consultationNumber: 1
+            consultationNumber: 1,
+            tempsTotal: 0
         });
     }
 
@@ -201,7 +213,7 @@ function track_redirect(articleId) {
 
     updateProfile(articleId);
 
-    window.location.href = `articles/article_${articleId}.html`;
+    window.location.href = `data/articles/article_${articleId}.html`;
 }
 
 // ===============================
@@ -235,6 +247,95 @@ function goToResult() {
     }
     window.location.href = "result.html";
 }
+
+// Fausses pub
+
+function displayAd() {
+	// RANDOMIZER
+    const mix = [...pubData].sort(() => 0.5 - Math.random());
+    const selected = mix.slice(0, 20);
+    // SEPARATION
+    const leftSelection = selected.slice(0,10);
+    const rightSelection = selected.slice(10,20)
+
+    const leftContainer = document.getElementById("ad-left-sidebar");
+    const rightContainer = document.getElementById("ad-right-sidebar");
+
+    // AFFICHAGE GAUCHE
+    if(leftContainer) {
+        leftContainer.innerHTML = "";
+
+        leftSelection.forEach(publicite => {
+
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.dataset.pubId = publicite.id;
+
+            cardDiv.innerHTML = `
+            <img src="${publicite.img}">
+            <h3>${publicite.title}</h3>
+            `;
+
+            leftContainer.appendChild(cardDiv);
+        });
+    }
+
+    // AFFICHAGE DROIT
+    if(rightContainer){
+        rightContainer.innerHTML = "";
+
+        rightSelection.forEach(publicite => {
+
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.dataset.pubId = publicite.id;
+
+            cardDiv.innerHTML = `
+            <img src="${publicite.img}">
+            <h3>${publicite.title}</h3>
+            `;
+
+            rightContainer.appendChild(cardDiv);
+        });
+    }
+}
+
+function startChronoAd(adId, tags) {
+    if (adEnCours && adEnCours.id === adId) return;
+    if (adEnCours) stopChronoAd();
+
+    adEnCours = { id: adId, tags: tags };
+    tempsDebutAd = Date.now();
+}
+
+function stopChronoAd(){ //A FINIR
+    if (!adEnCours || !tempsDebutAd) return;
+
+    const tempsPasse = (Date.now() - tempsDebutAd) / 1000; // en secondes
+
+    if (!tempsParPub[adEnCours.id]) {
+        tempsParPub[adEnCours.id] = 0;
+    }
+    tempsParPub[adEnCours.id] += tempsPasse;
+    localStorage.setItem('tempsParArticle', JSON.stringify(tempsParArticle));
+
+    // On ajoute des points au profil si survol > 0.5s
+    if (tempsPasse > 0.5) {
+        adEnCours.tags.forEach(tag => {
+            const category = tagCategories[tag];
+            if (category) {
+                if (!profile[category]) profile[category] = 0;
+                profile[category] += tempsPasse * 2; // 2 points par seconde de survol
+            }
+        });
+        localStorage.setItem("profile", JSON.stringify(profile));
+        // console.log(`👀 Pub survolée (${adEnCours.id}) : +${(tempsPasse * 2).toFixed(1)} points`);
+    }
+
+    adEnCours = null;
+    tempsDebutAd = null;
+}
+
 
 // ===============================
 // DEBUG

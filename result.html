@@ -51,6 +51,21 @@ button {
     cursor:pointer;
 }
 
+.resetButton {
+    margin-top:30px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:#ff3333;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.resetButton:hover{
+  background:#ff1a1a;
+}
+
 button:hover {
     background:#5848c2;
 }
@@ -70,7 +85,9 @@ button:hover {
   </div>
 
   <div class="description" id="archetype-desc"></div>
-
+  <div>
+  <button class="resetButton" onclick="clearData()"> Effacer mes données de tracking </button>
+  </div>
   <button onclick="goHome()">Retour Accueil</button>
 </div>
 
@@ -277,6 +294,11 @@ function displayTop3(top3) {
 
 function goHome() {
   window.location.href = "index.html";
+}
+
+function clearData(){
+  localStorage.clear();
+  window.location.reload();
 }
 
 </script>
